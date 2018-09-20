@@ -2,10 +2,11 @@
 A   CapitalT   class and methods that use the Cross class.
 
 Authors: David Mutchler, Vibha Alangar, Dave Fisher, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Achintya Gupta.
+"""  # TO: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
+import m1_Line as ml
 
 
 def main():
@@ -19,10 +20,10 @@ def main():
     print('Un-comment the calls in MAIN one by one')
     print(' to run the testing code as you complete the TODOs.')
 
-    # run_test_simple_t()
-    # run_test_set_colors()
-    # run_test_move_by()
-    # run_test_clone()
+    run_test_simple_t()
+    run_test_set_colors()
+    run_test_move_by()
+    run_test_clone()
 
 
 def run_test_simple_t():
@@ -112,6 +113,7 @@ class CapitalT(object):
     """
 
     def __init__(self, intersection_center, width, height, letter_thickness):
+
         """
         What comes in:
            -- self
@@ -145,8 +147,11 @@ class CapitalT(object):
           :type height:   int
           :type letter_thickness:   int
         """
+        ic=intersection_center
+        self.h_rect=rg.Rectangle(rg.Point(ic.x-width/2,ic.y-letter_thickness/2),rg.Point(ic.x+width/2,ic.y+letter_thickness/2))
+        self.v_rect=rg.Rectangle(rg.Point(ic.x-letter_thickness/2,ic.y-letter_thickness/2),rg.Point(ic.x+letter_thickness/2,ic.y-letter_thickness/2+height))
         # --------------------------------------------------------------
-        # TODO: 3.
+        # TO: 3.
         #   READ the above specification, including the Example.
         #   Implement this method
         #   Note: you will need to also implement attach_to before testing
@@ -170,8 +175,10 @@ class CapitalT(object):
         Type hints:
           :type window: rg.RoseWindow
         """
+        self.v_rect.attach_to(window)
+        self.h_rect.attach_to(window)
         # --------------------------------------------------------------
-        # TODO: 4.
+        # TO: 4.
         #   READ the above specification, including the Example.
         #   Implement and test this method by looking at the console and
         #     the graphics window (compare it to simple_t.pdf)
@@ -197,8 +204,12 @@ class CapitalT(object):
           :type fill_color: str
           :type outline_color: str
         """
+        self.v_rect.fill_color=fill_color
+        self.h_rect.fill_color=fill_color
+        self.h_rect.outline_color=outline_color
+        self.v_rect.outline_color=outline_color
         # --------------------------------------------------------------
-        # TODO: 5.
+        # TO: 5.
         #   READ the above specification, including the Example.
         #   Implement and test this method by uncommenting the appropriate
         #     run_test method in main. Compare the graphics window to
@@ -227,8 +238,12 @@ class CapitalT(object):
           :type dx: int
           :type dy: int
         """
+        self.v_rect.corner_1 = ml.Point.plus(self.v_rect.corner_1,ml.Point(dx,dy))
+        self.v_rect.corner_2 = ml.Point.plus(self.v_rect.corner_2, ml.Point(dx, dy))
+        self.h_rect.corner_1 = ml.Point.plus(self.h_rect.corner_1, ml.Point(dx, dy))
+        self.h_rect.corner_2 = ml.Point.plus(self.h_rect.corner_2, ml.Point(dx, dy))
         # --------------------------------------------------------------
-        # TODO: 6.
+        # TO: 6.
         #   READ the above specification, including the Example.
         #   Implement and test this method by uncommenting the appropriate
         #     run_test method in main. Compare the graphics window to
@@ -255,8 +270,12 @@ class CapitalT(object):
         Type hints:
           :rtype: CapitalT
         """
+        newT=CapitalT(self.h_rect.get_center(),self.h_rect.get_width(),self.v_rect.get_height(),self.h_rect.get_height())
+        newT.set_colors(self.v_rect.fill_color,self.v_rect.outline_color)
+        return newT
+
         # --------------------------------------------------------------
-        # TODO: 7.
+        # TO: 7.
         #   READ the above specification, including the Example.
         #   Implement and test this method by uncommenting the appropriate
         #     run_test method in main. Compare the graphics window to
