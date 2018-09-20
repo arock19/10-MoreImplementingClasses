@@ -184,6 +184,8 @@ class Line(object):
         self.start=start.clone()
         self.end=end.clone()
         self.clno = 0
+        self.st0=start
+        self.ed0=end
         """
         What comes in:
           -- self
@@ -521,7 +523,7 @@ class Line(object):
         """
         return Line(self.start.plus(other_line.start),self.end.plus(other_line.end))
         # --------------------------------------------------------------
-        # TODO: 9.
+        # TO: 9.
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -582,9 +584,10 @@ class Line(object):
         Type hints:
           :rtype: Point
         """
-        
+        return Point((self.start.x+self.end.x)/2,(self.start.y+self.end.y)/2)
+
         # --------------------------------------------------------------
-        # TODO: 11.
+        # TO: 11.
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -619,8 +622,9 @@ class Line(object):
           :type  line2: Line
           :rtype: bool
         """
+        return round(self.slope(),10)==round(line2.slope(),10)
         # --------------------------------------------------------------
-        # TODO: 12.
+        # TO: 12.
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -656,6 +660,8 @@ class Line(object):
         ################################################################
 
     def reset(self):
+        self.start=self.st0
+        self.end=self.ed0
         """
         What comes in:
           -- self
@@ -685,7 +691,7 @@ class Line(object):
             print(line2)  # Should print: Line[(0, 1), (10, 20)]
         """
         # --------------------------------------------------------------
-        # TODO: 13.
+        # TO: 13.
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
